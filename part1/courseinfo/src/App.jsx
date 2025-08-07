@@ -2,7 +2,7 @@ const Header = (props) =>{
   return (
     <>
     <h1>
-      {props.course}
+      {props.course.name}
     </h1>
     </>
   )
@@ -24,52 +24,76 @@ const Content = (props) =>{
 }
 
 const Part = (props) =>{
-  // console.log(props)
-    
-  return (
-    <>
-   {props.p.var1.map((item,index)=>(
-    <div key={index}>
-    
-      <p>{item.names}  contains {item.exercises} exercises</p>
-    </div>
-   ))}
-   
-    </>
+  
+  //  console.log(props)
+  const listNames = props.p.var1.map((exer,i) => 
+ 
+<li key={i}>{exer.name} contains {exer.exercises} exercises</li>
+// console.log(exer.name)
 
-  )
-}
+   )
+  //  console.log(listNames)
+    return (
+      <ul>{listNames}</ul>
+     
+   
+     
+    )
+  }
+  
+
+// console.log(listNames)
+ 
 
 const Total = (props) => {
+// console.log(props)
+let t = 0
+props.tot.map((exer) => {
+  t = t + exer.exercises}
+)
   return (
-
-    <p> The Total Exercises are {props.tot}</p>
+  <>
+  <p>Total exercises is {t}</p>
+  </>
+ 
+     
   )
-}
+    
 
+}
 
 
 const App = () =>{
-  const course = 'Half Stack application development'
-  const part1 = 'Fundamental of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
-  const parts = [
-    {names: part1, exercises:exercises1},
-    {names: part2, exercises:exercises2},
-    {names: part3, exercises:exercises3},
-  ]
+  const course = {
+    name: 'Half Stack application development',
+    parts :  [
+    {
+    name: 'Fundamental of React',
+    exercises: 10
+  },
+
+  {
+    name:'Using props to pass data',
+    exercises: 7
+
+  },
+  {
+    name:'State of a component',
+    exercises: 14
+
+  }
+]
+ 
+  }
+  
 
   return (
     <div>
       <Header course = {course}/>
-      {/* <Content partlist = [{part1},{part2},{part3}]/> */}
-    <Content var1 = {parts}/>
+      
+    <Content var1 = {course.parts}/>
        
-      <Total tot = {exercises1 + exercises2+ exercises3}/>
+      <Total tot = {course.parts}/>
     </div>
   )
 }
