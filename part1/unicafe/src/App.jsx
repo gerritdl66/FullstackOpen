@@ -3,18 +3,36 @@ import { useState } from 'react'
 const StatisticLine = ({ text, value }) => {
   
  
-    
-    if (text === "average" && isNaN(value)) {
+    // console.log(text,isNaN(value), value);
+
+  
+
+    if (isNaN(value)) {
        return (
-      <div>
-      select a feedback
-      </div>
+        // console.log("check2",value,text),
+
+    <tr>
+        
+      <td>select a feedback for info to show</td>
+      </tr>
+   
        )
-}
+      } else {if (text === "positive") {
+        return (
+          <tr>
+            <td>{text}</td> 
+            <td>{value} %</td> 
+          </tr>
+        )
+      }
+    }
+
+      
 return  (
-<div>
-average is {value}
-</div>
+<tr>
+            <td>{text}</td> 
+            <td>{value} %</td> 
+          </tr>
 )
 }
 
@@ -30,8 +48,9 @@ const App = () => {
       <button onClick={() => setNeutral(neutral + 1)}>neutral</button>
       <button onClick={() => setBad(bad + 1)}>bad</button>
       <h1>statistics</h1>
-      <table>
-        <tbody>
+      <table style={{width:"100%"}}>
+        <tbody style={{textAlign:"left"}}>
+          
           <StatisticLine text="good" value={good} />
           <StatisticLine text="neutral" value={neutral} />
           <StatisticLine text="bad" value={bad} />
@@ -42,7 +61,8 @@ const App = () => {
           />
           <StatisticLine
             text="positive"
-            value={good / (good + neutral + bad) * 100 + ' %'}
+            value={good / (good + neutral + bad) * 100}
+            
           />
         </tbody>
       </table>
